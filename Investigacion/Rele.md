@@ -1,5 +1,6 @@
 # Potencia
-Son 125W a 220V
+Son [125W](https://articulo.mercadolibre.com.ar/MLA-1135860313-toallero-ecosol-calefactor-asua-125w-_JM?searchVariation=174477607907#searchVariation=174477607907&position=12&search_layout=stack&type=item&tracking_id=2b7c46b2-c596-41e7-b8b7-d864a34da312)
+a 220V
 
 W=V*A
 
