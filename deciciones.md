@@ -1,6 +1,15 @@
 # Tengo un estado OFF?
 
+Puedo apagarlo teniendo apretado el boton
+
 Como lo inicio?
+
+#TODO
+
+led que prenda para indicar cuando esta prendido
+timer 
+rele
+
 
 
 # Temperatura media
