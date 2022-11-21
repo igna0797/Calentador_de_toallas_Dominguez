@@ -53,7 +53,7 @@ void maquina_de_estados_update(){
             case ON:
                 //timer(1); //1 hora seria                 
                 int temperaturaActual=sensor.getCelsius();
-                int humedadActual=sensor.getCelsius();                
+                int humedadActual=sensor.getCelsius();
                 static int Tmax=0;
                 static int Hmax=0;
                 sensor.getHumidity();
@@ -75,9 +75,7 @@ void maquina_de_estados_update(){
 
 //=====[Implementations of private functions]==================================
 
-bool debounce(){
-    return true ;
-}
+
 int timerinterrupt(){
     return 0;
 }
