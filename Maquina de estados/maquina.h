@@ -5,7 +5,8 @@
 
 //=====[Declaration of public defines]=========================================
 
-#define TIEMPO_PRENDIDO = 1000 * 1*60  * 1*60
+#define TIEMPO_MAXIMO_ENCENDIDO  1000 *60 *60  *1 // EL ULTIMO NUMERO ES EL TIEMPO EN HORAS
+#define TIEMPO_COOLDOWN  1000*60*60    *0.5
 
 /*creo que esta en milisegundos 
 1000 para segundos 

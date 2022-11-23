@@ -13,7 +13,8 @@
 typedef enum {
     APAGADO,
     WAITING,
-    PRENDIDO
+    INICIANDO,
+    PRENDIDO,
 } state_t;
 
 //=====[Declaration and initialization of public global objects]===============
@@ -21,17 +22,17 @@ typedef enum {
 
 //=====[Declaration of external public global variables]=======================
 
-state_t estado;
 
 //=====[Declaration and initialization of public global variables]=============
 
+state_t estado;
 DHT sensor(D7, DHT11);
-DigitalOut rele(D6);
+DigitalOut rele(LED1);
+DigitalIn boton(BUTTON1); 
 
 //=====[Declaration and initialization of private global variables]============
-int temperatura_media =25;
+// int temperatura_media =25;
 time_t tiempoEncendido;
-DigitalIn boton(D2); 
 //=====[Declarations (prototypes) of private functions]========================
 
 
@@ -41,33 +42,36 @@ void maquina_de_estados_init(){
     }
 
 void maquina_de_estados_update(){
+        static int Tmax=0;
+        static int Hmax=0;
+        int temperaturaActual = 0;
+        int humedadActual = 0; //leerlo aca y nunca mas?
         switch(estado){
-            case WAITING:
+            case WAITING:{
+                rele=OFF; //por si acaso se llego aca sin que se apagara.
                 sensor.readData();
-                if(sensor.ReadHumidity() > HUMIDITY_THRESHOLD || sensor.ReadTemperature(CELCIUS) > temperatura_media || boton==1 ){
-                    estado=PRENDIDO;
-                    rele=ON;
+                if(sensor.ReadHumidity() > HUMIDITY_THRESHOLD || sensor.ReadTemperature(CELCIUS) > TEMPERATURE_THRESHOLD || boton==1 ){
+                    estado=INICIANDO;
                 }
-            
-            case PRENDIDO:
-                tiempoEncendido=time(NULL);
-                
-                int temperaturaActual=sensor.ReadTemperature(CELCIUS);
-                int humedadActual=sensor.ReadTemperature(CELCIUS);
-                static int Tmax=0;
-                static int Hmax=0;
-                sensor.ReadHumidity();
+            }
+            case INICIANDO: {
+                tiempoEncendido=time(NULL);                
+                Tmax=0;
+                Hmax=0;
+                rele=ON;
+            }        
+            case PRENDIDO: {
+                sensor.readData();
+                temperaturaActual = sensor.ReadTemperature(CELCIUS);
+                humedadActual = sensor.ReadHumidity();
+
                 Tmax=max(temperaturaActual,Tmax);
                 Hmax=max(humedadActual,Hmax);
-
-                if (boton || temperaturaActual< Tmax-TEMP_OFF_THRESHOLD || humedadActual < Hmax- HUM_OFF_THRESHOLD ){
+                if (boton || temperaturaActual< Tmax-TEMP_OFF_THRESHOLD || humedadActual < Hmax- HUM_OFF_THRESHOLD || tiempoEncendido > TIEMPO_MAXIMO_ENCENDIDO){
                     estado=WAITING;
-                    Tmax=0;
-                    Hmax=0;
                     rele = OFF;
-
                 }
-
+            }
         }
 
 }
@@ -78,3 +82,4 @@ void maquina_de_estados_update(){
 int timerinterrupt(){
     return 0;
 }
+

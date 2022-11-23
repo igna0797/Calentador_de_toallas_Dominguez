@@ -7,10 +7,11 @@ Como lo inicio?
 #TODO
 
 arreglar wait_ms en DHT 
-led que prenda para indicar cuando esta prendido
-timer 
-rele
+~ led que prenda para indicar cuando esta prendido ~ -> lo tiene el modulito del rele
+timer
+~rele~
 armar un sleeep que prenda cada 30 min?
+qeu prenda cada 15 min si 15 min no cuando esta prendido?
 
 
 
