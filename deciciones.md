@@ -10,6 +10,7 @@ arreglar wait_ms en DHT
 led que prenda para indicar cuando esta prendido
 timer 
 rele
+armar un sleeep que prenda cada 30 min?
 
 
 

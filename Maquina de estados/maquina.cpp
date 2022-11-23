@@ -26,6 +26,7 @@ state_t estado;
 //=====[Declaration and initialization of public global variables]=============
 
 DHT sensor(D7, DHT11);
+DigitalOut rele(D6);
 
 //=====[Declaration and initialization of private global variables]============
 int temperatura_media =25;
@@ -45,7 +46,7 @@ void maquina_de_estados_update(){
                 sensor.readData();
                 if(sensor.ReadHumidity() > HUMIDITY_THRESHOLD || sensor.ReadTemperature(CELCIUS) > temperatura_media || boton==1 ){
                     estado=PRENDIDO;
-                    //rele.on();  //toDo:implementar esto
+                    rele=ON;
                 }
             
             case PRENDIDO:
@@ -63,7 +64,7 @@ void maquina_de_estados_update(){
                     estado=WAITING;
                     Tmax=0;
                     Hmax=0;
-                    //rele.off();
+                    rele = OFF;
 
                 }
 
