@@ -11,9 +11,9 @@
 
 //=====[Declaration of private data types]=====================================
 typedef enum {
-    OFF,
+    APAGADO,
     WAITING,
-    ON
+    PRENDIDO
 } state_t;
 
 //=====[Declaration and initialization of public global objects]===============
@@ -28,9 +28,8 @@ state_t estado;
 Dht11 sensor(D7);
 
 //=====[Declaration and initialization of private global variables]============
-
 int temperatura_media =25;
-
+time_t tiempoEncendido;
 DigitalIn boton(D2); 
 //=====[Declarations (prototypes) of private functions]========================
 
@@ -46,12 +45,13 @@ void maquina_de_estados_update(){
             case WAITING:
                 sensor.read();
                 if(sensor.getHumidity() > HUMIDITY_THRESHOLD || sensor.getCelsius() > temperatura_media || boton==1 ){
-                    estado=ON;
+                    estado=PRENDIDO;
                     //rele.on();  //toDo:implementar esto
                 }
             
-            case ON:
-                //timer(1); //1 hora seria                 
+            case PRENDIDO:
+                tiempoEncendido=time(NULL);
+                
                 int temperaturaActual=sensor.getCelsius();
                 int humedadActual=sensor.getCelsius();
                 static int Tmax=0;
