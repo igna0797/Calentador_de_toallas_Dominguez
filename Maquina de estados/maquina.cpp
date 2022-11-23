@@ -47,20 +47,22 @@ void maquina_de_estados_update(){
         int temperaturaActual = 0;
         int humedadActual = 0; //leerlo aca y nunca mas?
         switch(estado){
-            case WAITING:{
+            case WAITING:
                 rele=OFF; //por si acaso se llego aca sin que se apagara.
                 sensor.readData();
                 if(sensor.ReadHumidity() > HUMIDITY_THRESHOLD || sensor.ReadTemperature(CELCIUS) > TEMPERATURE_THRESHOLD || boton==1 ){
                     estado=INICIANDO;
                 }
-            }
-            case INICIANDO: {
+                break;
+            
+            case INICIANDO: 
                 tiempoEncendido=time(NULL);                
                 Tmax=0;
                 Hmax=0;
                 rele=ON;
-            }        
-            case PRENDIDO: {
+                break;
+            
+            case PRENDIDO: 
                 sensor.readData();
                 temperaturaActual = sensor.ReadTemperature(CELCIUS);
                 humedadActual = sensor.ReadHumidity();
@@ -70,7 +72,7 @@ void maquina_de_estados_update(){
                 if (boton || temperaturaActual< Tmax-TEMP_OFF_THRESHOLD || humedadActual < Hmax- HUM_OFF_THRESHOLD || tiempoEncendido > TIEMPO_MAXIMO_ENCENDIDO){
                     estado=WAITING;
                     rele = OFF;
-                }
+                break;
             }
         }
 

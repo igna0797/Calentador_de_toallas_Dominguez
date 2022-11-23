@@ -8,9 +8,9 @@
 
 int main()
 {
-    //maquina_de_estados_init();
+    maquina_de_estados_init();
     while (true) {
-       // maquina_de_estados_update();
+        maquina_de_estados_update();
 
     }
 }
