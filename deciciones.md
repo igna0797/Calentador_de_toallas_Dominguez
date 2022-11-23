@@ -6,6 +6,7 @@ Como lo inicio?
 
 #TODO
 
+arreglar wait_ms en DHT 
 led que prenda para indicar cuando esta prendido
 timer 
 rele

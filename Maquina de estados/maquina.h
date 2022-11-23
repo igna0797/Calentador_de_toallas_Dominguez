@@ -14,12 +14,12 @@
 */
 
 // @note {a partir de cuanto prende}
-#define HUMIDITY_THRESHOLD = 60 
-#define TEMPERATURE_THRESHOLD = 30
+#define HUMIDITY_THRESHOLD  60 
+#define TEMPERATURE_THRESHOLD   30
 
 // @note {cuanto puede bajar desde el max para apagarse solo}
-#define TEMP_OFF_THRESHOLD = 5 
-#define HUM_OFF_THRESHOLD = 5 
+#define TEMP_OFF_THRESHOLD   5  
+#define HUM_OFF_THRESHOLD    5 
 //=====[Declaration of public data types]======================================
 
 //=====[Declarations (prototypes) of public functions]=========================

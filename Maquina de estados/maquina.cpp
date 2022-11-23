@@ -3,7 +3,7 @@
 #include "mbed.h"
 #include "arm_book_lib.h"
 
-#include "Dht11.h"
+#include "DHT.h"
 #include "maquina.h"
 
 //=====[Declaration of private defines]========================================
@@ -25,7 +25,7 @@ state_t estado;
 
 //=====[Declaration and initialization of public global variables]=============
 
-Dht11 sensor(D7);
+DHT sensor(D7, DHT11);
 
 //=====[Declaration and initialization of private global variables]============
 int temperatura_media =25;
@@ -37,14 +37,13 @@ DigitalIn boton(D2);
 //=====[Implementations of public functions]===================================
 void maquina_de_estados_init(){
         estado=WAITING;
-        return
     }
 
 void maquina_de_estados_update(){
         switch(estado){
             case WAITING:
-                sensor.read();
-                if(sensor.getHumidity() > HUMIDITY_THRESHOLD || sensor.getCelsius() > temperatura_media || boton==1 ){
+                sensor.readData();
+                if(sensor.ReadHumidity() > HUMIDITY_THRESHOLD || sensor.ReadTemperature(CELCIUS) > temperatura_media || boton==1 ){
                     estado=PRENDIDO;
                     //rele.on();  //toDo:implementar esto
                 }
@@ -52,11 +51,11 @@ void maquina_de_estados_update(){
             case PRENDIDO:
                 tiempoEncendido=time(NULL);
                 
-                int temperaturaActual=sensor.getCelsius();
-                int humedadActual=sensor.getCelsius();
+                int temperaturaActual=sensor.ReadTemperature(CELCIUS);
+                int humedadActual=sensor.ReadTemperature(CELCIUS);
                 static int Tmax=0;
                 static int Hmax=0;
-                sensor.getHumidity();
+                sensor.ReadHumidity();
                 Tmax=max(temperaturaActual,Tmax);
                 Hmax=max(humedadActual,Hmax);
 
@@ -69,7 +68,6 @@ void maquina_de_estados_update(){
                 }
 
         }
-        return
 
 }
 
