@@ -1,8 +1,8 @@
 # Tengo un estado OFF?
 
-Puedo apagarlo teniendo apretado el boton
+~Puedo apagarlo teniendo apretado el boton~
 
-Como lo inicio?
+~Como lo inicio~ -> presiono un boton
 
 #TODO
 
@@ -16,6 +16,7 @@ agregar debounce al boton
 qeu prenda cada 15 min si 15 min no cuando esta prendido?
 quiero poder apagarlo si tengo apretado el boton (y prenderlo apretando el mismo) -> el boton tiene que ser un interrupt no? https://os.mbed.com/docs/mbed-os/v6.15/apis/ticker.html
 
+Cooldown?
 
 # Temperatura media
 

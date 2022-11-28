@@ -7,7 +7,7 @@
 
 #define TIEMPO_MAXIMO_ENCENDIDO  1000 *60 *60  *1 // EL ULTIMO NUMERO ES EL TIEMPO EN HORAS
 #define TIEMPO_COOLDOWN  1000*60*60    *0.5
-#define TIEMPO_HOLD_TO_TURN_OFF 100 //ms
+#define TIEMPO_HOLD_TO_TURN_OFF 2 //s
 /*creo que esta en milisegundos 
 1000 para segundos 
 60 para minutos
